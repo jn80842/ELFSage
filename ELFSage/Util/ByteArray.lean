@@ -200,7 +200,7 @@ def NByteArray.extract (bs : ByteArray) (n : Nat) (h : bs.size ≥ n) : NByteArr
            , ByteArray.copySlice
            , Array.extract
            , ByteArray.empty
-           , ByteArray.mkEmpty
+           , ByteArray.emptyWithCapacity
            ]
       have : ∀α, ∀n : Nat, @Array.extract.loop α #[] 0 n #[] = #[] := by
         unfold Array.extract.loop
@@ -246,7 +246,7 @@ theorem Nat.bitwise_sum : ∀{n m k : Nat}, m % 2^n = 0 → k < 2^n → m ||| k 
     apply Nat.mul_div_cancel'
     exact Nat.dvd_of_mod_eq_zero eq
   rw [←this]
-  rw [Nat.mul_add_lt_is_or]
+  rw [Nat.two_pow_add_eq_or_of_lt]
   assumption
 
 /--
